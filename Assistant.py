@@ -2,16 +2,15 @@ import os
 import openai
 from openai import OpenAI
 import time
-client = OpenAI()
 
 # Initialize the OpenAI client
+client = OpenAI()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 validFormats = ['c', 'cpp', 'csv', 'docx', 'html', 'java', 'json', 'md', 'pdf', 'php', 'pptx', 'py', 'rb', 'tex', 'txt', 'css', 'jpeg', 'jpg', 'js', 'gif', 'png', 'tar', 'ts', 'xlsx', 'xml', 'zip']
 def getFiles(folder):
     files = []
     for (dirpath, dirnames, filenames) in os.walk(folder):
-        #check if .git in dirpath
         if "." in dirpath:
             continue
         for filename in filenames:
