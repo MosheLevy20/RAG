@@ -60,26 +60,12 @@ def main():
             role="user",
             content=user_input
         )
-
-        messages = client.beta.threads.messages.list(
-        thread_id=thread.id
-        )
-        
-        num = len(messages.data)
-
         run = client.beta.threads.runs.create(
             thread_id=thread_id,
             assistant_id=assistant_id
         )
 
-        response = client.beta.threads.messages.list(
-            thread_id=thread_id
-        )
-        while len(response.data) == num:
-            response = client.beta.threads.messages.list(
-                thread_id=thread_id
-            )
-
+      
         while True:
             run = client.beta.threads.runs.retrieve(thread_id=thread.id, run_id=run.id)
             if run.status == 'completed':
